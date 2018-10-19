@@ -48,6 +48,9 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
+            this.lblscore = new System.Windows.Forms.Label();
+            this.lblGameStatus = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl00
@@ -264,9 +267,11 @@
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(53, 45);
             this.btnLeft.TabIndex = 16;
+            this.btnLeft.TabStop = false;
             this.btnLeft.Text = "←";
             this.btnLeft.UseVisualStyleBackColor = true;
             this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            this.btnLeft.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.btnLeft_PreviewKeyDown);
             // 
             // btnUp
             // 
@@ -274,9 +279,11 @@
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(53, 45);
             this.btnUp.TabIndex = 17;
+            this.btnUp.TabStop = false;
             this.btnUp.Text = "↑";
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.btnUp.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.btnUp_PreviewKeyDown);
             // 
             // btnRight
             // 
@@ -284,9 +291,11 @@
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(53, 45);
             this.btnRight.TabIndex = 18;
+            this.btnRight.TabStop = false;
             this.btnRight.Text = "→";
             this.btnRight.UseVisualStyleBackColor = true;
             this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            this.btnRight.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.btnRight_PreviewKeyDown);
             // 
             // btnDown
             // 
@@ -294,15 +303,59 @@
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(53, 45);
             this.btnDown.TabIndex = 19;
+            this.btnDown.TabStop = false;
             this.btnDown.Text = "↓";
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.btnDown.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.btnDown_PreviewKeyDown);
+            // 
+            // lblscore
+            // 
+            this.lblscore.BackColor = System.Drawing.SystemColors.Highlight;
+            this.lblscore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblscore.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblscore.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblscore.Location = new System.Drawing.Point(329, 49);
+            this.lblscore.Margin = new System.Windows.Forms.Padding(0);
+            this.lblscore.Name = "lblscore";
+            this.lblscore.Size = new System.Drawing.Size(186, 75);
+            this.lblscore.TabIndex = 20;
+            this.lblscore.Text = "0";
+            this.lblscore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblGameStatus
+            // 
+            this.lblGameStatus.BackColor = System.Drawing.Color.Aqua;
+            this.lblGameStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblGameStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblGameStatus.Location = new System.Drawing.Point(329, 150);
+            this.lblGameStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.lblGameStatus.Name = "lblGameStatus";
+            this.lblGameStatus.Size = new System.Drawing.Size(186, 75);
+            this.lblGameStatus.TabIndex = 21;
+            this.lblGameStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(323, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 49);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Score";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TwoZeroFourEightView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 428);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.ClientSize = new System.Drawing.Size(537, 422);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblscore);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnUp);
@@ -323,8 +376,12 @@
             this.Controls.Add(this.lbl02);
             this.Controls.Add(this.lbl01);
             this.Controls.Add(this.lbl00);
+            this.Controls.Add(this.lblGameStatus);
+            this.KeyPreview = true;
             this.Name = "TwoZeroFourEightView";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TwoZeroFourEightView_KeyDown);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TwoZeroFourEightView_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }
@@ -351,6 +408,9 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Label lblscore;
+        private System.Windows.Forms.Label lblGameStatus;
+        private System.Windows.Forms.Label label1;
     }
 }
 

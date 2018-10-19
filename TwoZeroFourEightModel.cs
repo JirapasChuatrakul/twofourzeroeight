@@ -35,6 +35,120 @@ namespace twozerofoureight
             HandleChanges();
         }
 
+        public bool checkGameWin() {
+            bool status = false;
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board[i, j] == 2048)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
+                }
+            }
+            return status;
+        }
+
+        public bool checkGameOver()
+        {
+            int count = 0;
+                for (int i = 0; i < boardSize; i++)
+                {
+                    for (int j = 0; j < boardSize; j++)
+                    {
+                        if (board[i,j] > 0)
+                        {
+                        count++;
+                        }
+                    if (i==0&&j==0) {
+                        if (board[i, j] == board[i+1, j]|| board[i, j] == board[i,j+1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i==0&&j!=0&&j!=3)
+                    {
+                        if (board[i, j] == board[i + 1, j] || board[i, j] == board[i, j + 1]|| board[i, j] == board[i, j - 1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i==0&&j==3)
+                    {
+                        if (board[i, j] == board[i + 1 , j] || board[i, j] == board[i, j-1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i!=0 && i!=3  && j == 0)
+                    {
+                        if (board[i, j] == board[i + 1, j] || board[i, j] == board[i -1, j] || board[i,j] == board[i,j+1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i != 0 && i != 3 && j != 0 && j != 3)
+                    {
+                        if (board[i, j] == board[i + 1, j] || board[i, j] == board[i - 1, j] || board[i, j] == board[i, j + 1] || board[i,j] == board[i,j-1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i != 0 && i != 3 && j == 3)
+                    {
+                        if (board[i, j] == board[i + 1, j] || board[i, j] == board[i - 1, j] || board[i, j] == board[i, j - 1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i == 3 && j == 0)
+                    {
+                        if (board[i, j] == board[i - 1, j] || board[i, j] == board[i, j + 1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i == 3 && j != 0 && j != 3)
+                    {
+                        if (board[i, j] == board[i - 1, j] || board[i, j] == board[i, j + 1] || board[i,j] == board[i,j-1])
+                        {
+                            return false;
+                        }
+                    }
+                    else if (i == 3 && j == 3)
+                    {
+                        if (board[i, j] == board[i - 1, j] || board[i, j] == board[i, j - 1])
+                        {
+                            return false;
+                        }
+                    }
+                }
+                }
+                if (count != 16)
+                {
+                   return false;
+                }
+            return true;
+        }
+
+        public int GetScore()
+        {
+            int sum = 0;
+            for (int i = 0; i < boardSize; i++)
+            {
+                for(int j = 0; j < boardSize; j++)
+                {
+                    sum = sum + board[i, j];
+                }
+            }
+            return sum;
+        }
+
         public int[,] GetBoard()
         {
             return board;
